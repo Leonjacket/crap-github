@@ -1,0 +1,9 @@
+helloworld123.great-site.net
+username: if0_35226999
+pass: b4pGCmBxXmt
+
+Helloworld123
+14072005Dat
+
+http://helloworld123.great-site.net :front-end
+http://helloworld123.great-site.net/wp-admin/ : back-end

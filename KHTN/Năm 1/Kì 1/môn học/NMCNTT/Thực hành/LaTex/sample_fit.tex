@@ -1,0 +1,128 @@
+
+\documentclass[12pt]{article}
+
+\setlength{\oddsidemargin}{0pt}
+\setlength{\textwidth}{470pt}
+\usepackage{amssymb}
+\usepackage{amsfonts}
+\usepackage{amsmath}
+\usepackage{latexsym}
+\usepackage{epsfig}
+
+\newtheorem{prop}{Proposition}
+\newenvironment{proof}{\noindent \textbf{Proof:}}{$\Box$}
+\newcommand{\infint}{\int_{-\infty}^\infty}
+\newcommand{\intunit}{\int_{-1}^1}
+
+\title{CS Latex Problem Set \#1}
+
+\author{Xxxx Y. Zzzzzzzzz\\
+{\tt xyz1234@fit.hcmus.edu.vn}
+}
+
+\begin{document}
+
+\maketitle
+
+\section{Problem 1}
+ 
+Insert a correct solution to problem 1 here.
+
+\section{Problem 2}
+
+Insert a correct solution to problem 2 here.  And so on.  
+
+\medskip
+
+The two most basic things to know about \LaTeX are:
+
+\begin{itemize}
+\item Extra         spaces     in     the     input     file
+don't
+matter
+(compare this output with what's in the .tex file).  However, if you have a blank
+line in the .tex file, this makes whatever comes after it come on a new line
+
+like this.
+
+\item To put something in math mode, surround it with dollar signs.  If you do
+this correctly you will get nice-looking math like $x + y = z$.  If you do it incorrectly
+you'll get an error message; if you accidentally have non-math-mode text contained inside
+dollar signs $it will come out looking very bad.$
+
+\end{itemize}
+
+\LaTeX is very good at handling mathematical symbols, equations, and so on.  To give you
+a sense of what it can do, 
+here's a sample of some math stuff.  
+By comparing the output with the stuff in the 
+.tex file, you should be able to see how to use most of the basic features in 
+\LaTeX.  
+
+\bigskip
+\bigskip
+
+\begin{prop}
+For $1 \leq k \leq n$ let $X_k$ be the random variable which is $-1$ with probability 
+$p_k$ and $+1$ with probability $1-p_k$\@.  Let $x = \sum_{k=1}^n X_k$.  Then for every $\theta$,
+\[\Pr[|x-\theta| \leq 1] \leq \frac{O(1)}{\sqrt{\sum_{k=1}^n p_k(1-p_k)}}.\]
+\end{prop}
+
+\begin{proof}
+Define:
+\[p(x) = \frac{2(1-\cos{x})}{x^2} \geq 0\qquad\text{and}\qquad h(t) = \begin{cases} 1-|t|, & |t| 
+\leq 1 \\ 0, & \text{else} \end{cases}.\]
+
+\noindent Elementary integration by parts shows that $p(x)$ is the inverse Fourier transform of 
+$h(t)$; i.e.,
+\[p(x) = \infint e^{-itx} h(t)\,dt.\]
+
+\noindent By considering the Taylor expansion of $\cos{x}$, we get that $p(x) \geq \frac{11}{12}$ 
+on the interval $[-1,1]$.  Hence:
+\newcommand{\twel}{\frac{12}{11}}
+\begin{eqnarray}
+\Pr[|x-\theta| \leq 1] & = & E_x[\mathbf{1}_{x \in [\theta-1,\theta+1]}] \nonumber \\
+& \leq & {\textstyle \twel} E[p(x-\theta)] \nonumber \\
+& = & {\textstyle \twel} E\Bigl[\infint e^{-it(x-\theta)}h(t)\,dt\Bigr] \nonumber \\
+& = & \twel \infint E[e^{-itx} e^{it\theta} h(t)]\,dt \nonumber \\
+& = & \twel \Bigl|\infint e^{it\theta} h(t) E[e^{-itx}]\,dt\Bigr| \label{eqn:1}\\
+& \leq & \twel \intunit \bigl|E[e^{-itx}]\bigr|\,dt, \label{eqn:2}
+\end{eqnarray}
+with (\ref{eqn:1}) following because the quantity is already real and nonnegative, and 
+(\ref{eqn:2}) following because $|e^{it\theta}| \leq 1$, $h(t) = 0$ outside $[-1,1]$, and $|h(t)| 
+\leq 1$ otherwise.\\
+
+\noindent Now,
+\begin{eqnarray*}
+E_x[e^{-itx}] & = & E_{x_k \leftarrow X_k} [\exp (-it\sum_{k=1}^n x_k\bigr)] \\
+& = & E_{x_k \leftarrow X_k} \Bigl[\prod_{k=1}^n \exp (-itx_k)\Bigr] \\
+& = & \prod_{k=1}^n E_{x_k \leftarrow X_k}[\exp(-itx_k)] \qquad \text{(by independence)}\\
+& = & \prod_{k=1}^n (p_k \exp(it) + (1-p_k) \exp(-it)) \\
+& = & \prod_{k=1}^n (\cos t + i(2p_k-1)\sin t).
+\end{eqnarray*}
+
+\noindent By comparing Taylor expansions one can establish that
+$$
+|\cos t + i(2p-1) \sin t| \leq \exp(-{\frac {11}{24}}p(1-p)t^2).
+$$
+for $p \in [0,1], t\in[-1,1].$
+We may conclude that:
+\begin{eqnarray*}
+\Pr[|x-\theta| \leq 1] & \leq & \twel \intunit \prod_{k=1}^n \exp(-{\textstyle 
+\frac{11}{24}}p_k(1-p_k)t^2) \,dt \\
+& = & \twel \intunit \exp(-{\textstyle \frac{11}{24}}\left[\sum_{k=1}^n p_k(1-p_k)\right]t^2) \,dt 
+\\
+& = & \twel \intunit \exp(-t^2/2({\scriptstyle \sqrt{\twel}}\sqrt{\sum p_k(1-p_k)}^{-1})^2)\,dt \\
+& \leq & \twel \infint \exp(-t^2/2({\scriptstyle \sqrt{\twel}}\sqrt{\sum p_k(1-p_k)}^{-1})^2)\,dt 
+\\
+& = & \sqrt{2\pi}({\textstyle \twel})^{3/2} \sqrt{\sum p_k(1-p_k)}^{-1},
+\end{eqnarray*}
+since $(\sqrt{2\pi} \sigma)^{-1} \exp(-t^2/2\sigma^2)$ is a probability density function for every 
+positive $\sigma$.
+\end{proof}
+
+\end{document}
+
+
+
+

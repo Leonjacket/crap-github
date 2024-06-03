@@ -1,0 +1,28 @@
+2.
+a)
+2n + 2 assignments
+n comparions
+
+b)
+
+n^3 + n^2
+
+for i: n+1
+for j: n(n+1)
+for k: (n^2)(n+1)
+=> assignments = n^3 + n^2 + n+1 + n(n+1) + (n^2)(n+1)
+
+for i: n+1
+for j: n(n+1)
+for k: (n^2)(n+1)
+=> comparions = n+1 + n(n+1) + (n^2)(n+1)
+
+3.
+a)
+
+
+b)
+
+
+c)
+

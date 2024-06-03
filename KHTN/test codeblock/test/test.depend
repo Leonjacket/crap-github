@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1717005677 source:e:\test codeblock\test\main.cpp
+	<iostream>
+	<algorithm>
+	<ctime>
+
